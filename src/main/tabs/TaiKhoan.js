@@ -4,9 +4,12 @@ import HeaderComponent from '../../components/HeaderComponent';
 
 const TaiKhoan = props => {
   const {navigation} = props;
+  const onPressBack = () => {
+    navigation.goBack();
+  };
   return (
     <View>
-      <HeaderComponent title="PROFILE" />
+      <HeaderComponent onPressGoBack={onPressBack} title="PROFILE" />
       <View style={styles.container}>
         <View style={styles.infContainer}>
           <Image

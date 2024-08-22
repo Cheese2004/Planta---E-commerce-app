@@ -24,7 +24,6 @@ const TrangChu = props => {
   };
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* <View style={styles.container}> */}
       <View style={styles.headerContainer}>
         <Image
           source={require('../../../assets/img/banner.png')}
@@ -49,23 +48,25 @@ const TrangChu = props => {
       </View>
       <View style={styles.bodyContainer}>
         <View style={{marginTop: 30}}>
-          <ProductItemComponent title={'Cây trồng'} data={plants} />
+          <ProductItemComponent
+            title={'Cây trồng'}
+            data={plants}
+            onPressMore={goToCate}
+          />
         </View>
-        <TouchableOpacity onPress={goToCate}>
-          <Text style={styles.link}>Xem thêm Cây trồng</Text>
-        </TouchableOpacity>
+
         <View style={{marginTop: 30}}>
-          <ProductItemComponent title={'Phụ kiện'} data={accessories} />
+          <ProductItemComponent
+            title={'Phụ kiện'}
+            data={accessories}
+            onPressMore={() => {
+              navigation.navigate('Accessories');
+            }}
+          />
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Accessories');
-          }}>
-          <Text style={styles.link}>Xem thêm Phụ kiện</Text>
-        </TouchableOpacity>
+
         <ServiceComponent title={'Combo chăm sóc (mới)'} data={services} />
       </View>
-      {/* </View> */}
     </ScrollView>
   );
 };

@@ -213,7 +213,7 @@ const historyTransaction = [
     status: 'cancelled',
   },
   {
-    id: 'od3',
+    od_id: 'od3',
     time: 'Thứ tư, 03/09/2021',
     name: 'Spider Plant',
     type: 'Ưa bóng',

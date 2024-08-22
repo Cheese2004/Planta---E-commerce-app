@@ -53,9 +53,9 @@ const LichSu = props => {
       <HeaderComponent title="LỊCH SỬ GIAO DỊCH" onPressGoBack={onPressBack} />
       <FlatList
         data={historyTransaction}
+        keyExtractor={item => item.od_id}
         renderItem={({item}) => renderTransactionHistory(item)}
         contentContainerStyle={styles.container}
-        keyExtractor={item => item.od_id}
       />
     </>
   );

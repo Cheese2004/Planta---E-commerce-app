@@ -16,8 +16,7 @@ const QA = props => {
   const onPressBack = () => {
     navigation.goBack();
   };
-  // const [indexShow, setIndexShow] = useState(0);
-  // const [isShow, setIsShow] = useState(false);
+
   const arrQA = [
     {
       id: 1,
@@ -80,7 +79,7 @@ const QA = props => {
         showsHorizontalScrollIndicator={false}
         style={styles.container}>
         {arrQA.map((item, index) => {
-          return <QAComponent data={item} />;
+          return <QAComponent data={item} key={index} />;
         })}
       </ScrollView>
     </View>

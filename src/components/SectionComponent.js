@@ -21,44 +21,50 @@ const SectionComponent = props => {
       productItem: item,
     });
   };
-  // const renderItem = data => {
-  //   return (
-  //     <ScrollView
-  //       contentContainerStyle={styles.itemContainer}
-  //       showsVerticalScrollIndicator={false}>
-  //       {data.map((item, index) => {
-  //         const arrImage = item?.images;
-  //         return (
-  //           <TouchableOpacity
-  //             style={[
-  //               !!item.images ? {height: childHeight1} : {height: childHeight2},
-  //               styles.singItem,
-  //             ]}
-  //             key={index}
-  //             onPress={() => handlePress(item)}>
-  //             {!!item.images && (
-  //               <Image source={arrImage[0]} style={styles.image} />
-  //             )}
-  //             {!!item.image && (
-  //               <Image source={item.image} style={styles.image} />
-  //             )}
+  const renderItem = data => {
+    return (
+      <ScrollView
+        contentContainerStyle={styles.itemContainer}
+        showsVerticalScrollIndicator={false}>
+        {data.map((item, index) => {
+          const arrImage = item?.images;
+          return (
+            <TouchableOpacity
+              style={[
+                !!item.images ? {height: childHeight1} : {height: childHeight2},
+                styles.singItem,
+              ]}
+              key={index}
+              onPress={() => handlePress(item)}>
+              {!!item.images && (
+                <Image source={arrImage[0]} style={styles.image} />
+              )}
+              {!!item.image && (
+                <Image source={item.image} style={styles.image} />
+              )}
 
-  //             <Text style={styles.name}>{item.name}</Text>
-  //             {!!item.type && <Text style={styles.type}>{item.type}</Text>}
-  //             <Text style={styles.price}>{item.price}</Text>
-  //           </TouchableOpacity>
-  //         );
-  //       })}
-  //     </ScrollView>
-  //   );
-  // };
-  const {title, data} = props;
+              <Text style={styles.name}>{item.name}</Text>
+              {!!item.type && <Text style={styles.type}>{item.type}</Text>}
+              <Text style={styles.price}>{item.price}</Text>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+    );
+  };
+  const {title, data, onPressMore = () => {}} = props;
   return (
     <View style={styles.sectionContainer}>
       {!!title && <Text style={styles.title}>{title}</Text>}
       {renderItem(data)}
-      {!!title && <Text style={styles.linkMore}>Xemm thêm {title}</Text>}
-      
+      {!!title && (
+        <TouchableOpacity
+          onPress={() => {
+            onPressMore();
+          }}>
+          <Text style={styles.linkMore}>Xem thêm {title}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

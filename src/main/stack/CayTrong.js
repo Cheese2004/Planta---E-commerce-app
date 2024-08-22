@@ -6,26 +6,23 @@ import HeaderComponent from '../../components/HeaderComponent';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {LayDanhSachSanPham} from '../../reducers/ListProductSlice';
-import ProductByCateComponent from '../../components/ProductByCateComponent';
-
+import ProductByCate from '../../components/ProductByCate';
 const CayTrong = ({navigation}) => {
   const dispatch = useDispatch();
   const {subCateData, subCateStatus} = useSelector(state => state.getSubCate);
   const {listProData, listProStatus} = useSelector(state => state.getListPro);
-  useEffect(() => {
-    if (subCateStatus == 'succeeded') {
-      {
-        console.log(subCateStatus, subCateData);
-      }
-    }
-  }, [subCateStatus]);
+  // useEffect(() => {
+  //   if (subCateStatus == 'succeeded') {
+  //     {
+  //       console.log(subCateStatus, subCateData);
+  //     }
+  //   }
+  // }, [subCateStatus]);
 
-  let apiSubCateData = subCateData.data;
-  console.log(apiSubCateData);
+  let apiSubCateData = subCateData?.data;
   let arrCate = [{catId: '', catName: 'Tất cả'}];
-  apiSubCateData.forEach(item => {
+  apiSubCateData?.forEach(item => {
     let obj = {catId: item._id, catName: item.name};
-    // console.log(obj);
     arrCate.push(obj);
   });
   // console.log(arrCate);
@@ -38,54 +35,53 @@ const CayTrong = ({navigation}) => {
     navigation.navigate('Cart');
   };
 
-  useEffect(() => {
-    console.log(listProData, listProStatus);
-  }, [listProStatus]);
+  // useEffect(() => {
+  //   console.log(listProData, listProStatus);
+  // }, [listProStatus]);
   return (
-    <>
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
-        <HeaderComponent
-          title={'CÂY TRỒNG'}
-          onPressGoBack={onPressBack}
-          onPressGoCart={onPressCart}
-        />
-        <View>
-          <View style={styles.tabsContainer}>
-            {arrCate.map((item, index) => {
-              // console.log(item);
-              return (
-                <View>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setCateSelected(item.catName);
-                      console.log(item);
-                      dispatch(LayDanhSachSanPham(item.catId));
-                      console.log(
-                        'danh sách sản phẩm theo danh mục: ',
-                        listProData,
-                      );
-                    }}>
-                    <Text
-                      style={
-                        item.catName == cateSelected
-                          ? styles.itemSelected
-                          : styles.itemCate
-                      }>
-                      {item.catName}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
-          </View>
+    <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <HeaderComponent
+        title={'CÂY TRỒNG'}
+        onPressGoBack={onPressBack}
+        onPressGoCart={onPressCart}
+      />
+      <View style={{flex: 1}}>
+        <View style={styles.tabsContainer}>
+          {arrCate.map((item, index) => {
+            return (
+              <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    setCateSelected(item.catName);
+                    // console.log(item);
+                    dispatch(LayDanhSachSanPham(item.catId));
+                    // console.log(
+                    //   'danh sách sản phẩm theo danh mục: ',
+                    //   listProData,
+                    // );
+                  }}>
+                  <Text
+                    style={
+                      item.catName == cateSelected
+                        ? styles.itemSelected
+                        : styles.itemCate
+                    }>
+                    {item.catName}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            );
+          })}
+        </View>
+        <View style={{flex: 1}}>
           {listProData?.data?.length > 0 ? (
-            <ProductByCateComponent data={listProData.data} />
+            <ProductByCate data={listProData.data} />
           ) : (
             ''
           )}
         </View>
       </View>
-    </>
+    </View>
   );
 };
 

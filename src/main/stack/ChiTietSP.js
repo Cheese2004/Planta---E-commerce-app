@@ -7,8 +7,6 @@ import {
   Image,
 } from 'react-native';
 import React, {useContext, useState} from 'react';
-import {SliderBox} from 'react-native-image-slider-box';
-import {useNavigation} from '@react-navigation/native';
 import HeaderComponent from '../../components/HeaderComponent';
 import {AppContext} from '../../AppContext';
 const ChiTietSP = props => {
@@ -18,7 +16,6 @@ const ChiTietSP = props => {
   const [quantity, setQuantity] = useState(0);
   const initialPrice = productItem.price;
   const [temporaryTotal, setTemporaryTotal] = useState(initialPrice);
-  const images = productItem.images;
   const onPressBack = () => {
     navigation.goBack();
   };
@@ -48,6 +45,7 @@ const ChiTietSP = props => {
       return;
     }
   };
+
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <HeaderComponent
@@ -59,77 +57,48 @@ const ChiTietSP = props => {
         <View style={styles.imgContainer}>
           <Image source={{uri: productItem.image}} />
         </View>
-        <View style={styles.contaibutontree}>
-          <View style={styles.contentbuttontree}>
-            <TouchableOpacity style={styles.bottontree}>
-              <Text style={styles.textbuttontree}>Cây trồng</Text>
-            </TouchableOpacity>
+        <View style={styles.bodyContainer}>
+          <View style={styles.typeContainer}>
+            <Text style={styles.typeItem}>Cây trồng</Text>
             {productItem.type ? (
-              <TouchableOpacity style={styles.bottontree}>
-                <Text style={styles.textbuttontree}>{productItem.type}</Text>
-              </TouchableOpacity>
+              <Text style={styles.typeItem}>{productItem.type}</Text>
             ) : (
-              <Text style={styles.emptyText}></Text>
+              ''
             )}
           </View>
+          <View>
+            <Text style={styles.price}>{productItem.price}</Text>
+          </View>
+          <View style={styles.rowItem}>
+            <Text style={styles.title}>Chi tiết sản phẩm</Text>
+          </View>
+          <View style={styles.rowItem}>
+            <Text style={styles.infText}>Kích cỡ</Text>
+            <Text style={styles.infText}>{productItem.size}</Text>
+          </View>
+          <View style={styles.rowItem}>
+            <Text style={styles.infText}>Xuất xứ</Text>
+            <Text style={styles.infText}>{productItem.origin}</Text>
+          </View>
+          <View style={styles.rowItem}>
+            <Text style={styles.infText}>Tình trạng</Text>
+            <Text style={styles.stockText}>Còn 156 sp</Text>
+          </View>
         </View>
-        <View style={styles.contentext}>
-          <Text style={styles.mony}>{productItem.price}</Text>
-        </View>
-        <View style={styles.contenchitiet}>
-          <View style={styles.contaichitiet}>
-            <Text style={styles.textchitiet}>Chi tiết sản phẩm</Text>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 1,
-              backgroundColor: 'black',
-            }}></View>
-          <View style={styles.contaichitiet}>
-            <Text style={styles.textkc}>Kích cỡ</Text>
-            <Text style={styles.textkc}>{productItem.size}</Text>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 0.7,
-              backgroundColor: 'black',
-            }}></View>
-          <View style={styles.contaichitiet}>
-            <Text style={styles.textkc}>Xuất xứ</Text>
-            <Text style={styles.textkc}>{productItem.origin}</Text>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 0.7,
-              backgroundColor: 'black',
-            }}></View>
-          <View style={styles.contaichitiet}>
-            <Text style={styles.textkc}>Tình trạng</Text>
-            <Text style={styles.textsp}>Còn {productItem.qty} sp</Text>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 0.7,
-              backgroundColor: 'black',
-            }}></View>
-        </View>
-        <View style={styles.contaifooter}>
-          <View style={styles.contaitamtinh}>
-            <View>
-              <Text style={styles.textspdachon}>Đã chọn 1 sản phẩm</Text>
-              <View style={styles.contaisquare}>
+
+        <View style={styles.footerContainer}>
+          <View style={styles.totalContainer}>
+            <View style={styles.quantityContainer}>
+              <Text style={styles.footerText}>Đã chọn 1 sản phẩm</Text>
+              <View style={styles.quantityBox}>
                 <TouchableOpacity onPress={handleDecreaseQuantity}>
                   <Image
                     source={require('../../../assets/img/minus.png')}
                     style={styles.iconsquare}
                   />
                 </TouchableOpacity>
-                <View style={styles.contaitextsquare}>
-                  <Text style={styles.textsquare}>{quantity}</Text>
+                <View>
+                  <Text style={styles.quantity}>{quantity}</Text>
                 </View>
                 <TouchableOpacity onPress={handleIncreaseQuantity}>
                   <Image
@@ -139,24 +108,21 @@ const ChiTietSP = props => {
                 </TouchableOpacity>
               </View>
             </View>
-            <View>
-              <Text style={styles.texttamtinh}>Tạm tính</Text>
-              <View style={styles.contaitientamtinh}>
-                <Text style={styles.tientamtinh}>{temporaryTotal}đ</Text>
-              </View>
+            <View style={styles.priceContainer}>
+              <Text style={styles.footerText}>Tạm tính</Text>
+              <Text style={styles.totalPrice}>{temporaryTotal}đ</Text>
             </View>
           </View>
-          <View
-            style={[
-              quantity > 0
-                ? {backgroundColor: '#007537'}
-                : {backgroundColor: '#ABABAB'},
-              styles.contaibuttonchonmua,
-            ]}>
+          <View>
             <TouchableOpacity
-              style={styles.buttonchonmua}
+              style={[
+                quantity > 0
+                  ? {backgroundColor: '#007537'}
+                  : {backgroundColor: '#ABABAB'},
+                styles.actButton,
+              ]}
               onPress={onPressAddToCart}>
-              <Text style={styles.textchonmua}>Chọn mua</Text>
+              <Text style={styles.btnLabel}>Chọn mua</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -168,6 +134,84 @@ const ChiTietSP = props => {
 export default ChiTietSP;
 
 const styles = StyleSheet.create({
+  imgContainer: {
+    width: '100%',
+    height: 270,
+    justifyContent: 'center',
+  },
+  totalContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  totalPrice: {
+    fontSize: 24,
+    fontFamily: 'Lato',
+    fontWeight: '500',
+    lineHeight: 34,
+    color: 'black',
+  },
+  priceContainer: {
+    gap: 5,
+    justifyContent: 'center',
+  },
+  quantity: {
+    fontSize: 16,
+    fontFamily: 'Lato',
+    fontWeight: '400',
+    lineHeight: 20,
+    color: 'black',
+  },
+  quantityBox: {
+    flexDirection: 'row',
+    gap: 30,
+    alignItems: 'center',
+  },
+  quantityContainer: {
+    gap: 5,
+    justifyContent: 'center',
+  },
+  footerText: {
+    fontSize: 14,
+    fontFamily: 'Lato',
+    fontWeight: '400',
+    lineHeight: 20,
+    color: 'black',
+  },
+  infText: {
+    fontSize: 14,
+    fontFamily: 'Lato',
+    fontWeight: '400',
+    lineHeight: 20,
+    color: 'black',
+  },
+  stockText: {
+    fontSize: 14,
+    fontFamily: 'Lato',
+    fontWeight: '400',
+    lineHeight: 20,
+    color: '#007537',
+  },
+  title: {
+    fontSize: 16,
+    fontFamily: 'Lato',
+    fontWeight: '500',
+    lineHeight: 22,
+    color: 'black',
+  },
+  rowItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomColor: '#ABABAB',
+    paddingBottom: 5,
+    borderBottomWidth: 1,
+  },
+  bodyContainer: {
+    paddingHorizontal: 48,
+    marginTop: 15,
+    gap: 15,
+  },
   leftArrow: {
     position: 'absolute',
     top: 123,
@@ -178,11 +222,7 @@ const styles = StyleSheet.create({
     top: 123,
     right: 24,
   },
-  imgContainer: {
-    width: '100%',
-    height: 270,
-    justifyContent: 'center',
-  },
+
   paginationBoxStyle: {
     bottom: 0,
     alignSelf: 'center',
@@ -212,211 +252,52 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 58,
   },
-  contentbuttontree: {
+  typeContainer: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    paddingHorizontal: 48,
-    paddingVertical: 15,
     gap: 10,
-    alignSelf: 'stretch',
   },
-  bottontree: {
-    width: 'auto',
-    height: 40,
+  typeItem: {
+    fontSize: 14,
+    fontWeight: '400',
+    fontFamily: 'Lato',
+    lineHeight: 22,
     borderRadius: 10,
     backgroundColor: '#009245',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-  },
-  textbuttontree: {
     color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '400',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    lineHeight: 22,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
   },
-  contentext: {
-    width: '100%',
-    height: 38,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 17,
-    alignSelf: 'stretch',
-  },
-  mony: {
-    width: 279,
-    height: 34,
+  price: {
     fontSize: 24,
     fontWeight: '500',
     fontFamily: 'Lato',
     fontStyle: 'normal',
     color: '#007537',
-  },
-  contenchitiet: {
-    width: '100%',
-    height: 173,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 17,
-    paddingHorizontal: 40,
-    paddingVertical: 48,
-    alignSelf: 'stretch',
-  },
-  textchitiet: {
-    width: 'auto',
-    height: 'auto',
-    fontSize: 16,
-    fontWeight: '500',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    color: '#3a3a3a',
-    lineHeight: 22,
-  },
-  contaichitiet: {
-    width: '100%',
-    height: 'auto',
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'stretch',
-  },
-  textkc: {
-    width: 'auto',
-    height: 'auto',
-    lineHeight: 20,
-    fontSize: 14,
-    fontWeight: '400',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    color: '#3a3a3a',
-  },
-  textsp: {
-    width: 'auto',
-    height: 'auto',
-    lineHeight: 20,
-    fontSize: 14,
-    fontWeight: '400',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    color: '#007537',
-  },
-  contaifooter: {
-    width: '100%',
-    height: 'auto',
-    paddingTop: 0,
-    paddingHorizontal: 24,
-    paddingBottom: 15,
-
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contaitamtinh: {
-    width: '100%',
-    height: 82,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: 2,
-    paddingVertical: 15,
-    alignSelf: 'stretch',
-  },
-  texttamtinh: {
-    width: 92,
-    textAlign: 'right',
-    height: 'auto',
-    fontSize: 14,
-    fontWeight: '400',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    color: '#000',
-    lineHeight: 20,
-  },
-  contaitientamtinh: {
-    height: 36,
-    flexDirection: 'column',
-    display: 'flex',
-    justifyContent: 'center',
-    flexShrink: 0,
-    alignSelf: 'stretch',
-  },
-  tientamtinh: {
-    width: 92,
-    height: 36,
-    fontSize: 24,
-    fontWeight: '500',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    color: '#000',
     lineHeight: 34,
-    textAlign: 'right',
   },
-  textspdachon: {
-    width: 'auto',
-    height: 'auto',
-    lineHeight: 20,
-    fontSize: 14,
-    fontWeight: '400',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    color: '#000',
+
+  footerContainer: {
+    marginTop: 25,
+    paddingHorizontal: 24,
+    gap: 15,
   },
-  contaisquare: {
-    width: 'auto',
-    height: 'auto',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignSelf: 'stretch',
-    flexDirection: 'row',
-  },
+
   iconsquare: {
     width: 30,
     height: 30,
-    flexShrink: 0,
   },
-  contaitextsquare: {
-    display: 'flex',
-    width: 8,
-    height: 30,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  textsquare: {
-    lineHeight: 20,
-    fontSize: 16,
-    fontWeight: '400',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    color: '#000',
-    textAlign: 'center',
-  },
-  contaibuttonchonmua: {
+
+  actButton: {
     width: '100%',
-    display: 'flex',
     height: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 100,
+    paddingVertical: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#ABABAB',
+    backgroundColor: '#ABABAB',
     borderRadius: 10,
-    alignSelf: 'stretch',
   },
-  // buttonchonmua: {
-  //   width: '100%',
-  //   height: 'auto',
-  //   borderRadius: 10,
-  //   alignContent: 'center',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // },
-  textchonmua: {
+
+  btnLabel: {
     fontSize: 16,
     fontWeight: '500',
     fontFamily: 'Lato',
@@ -424,9 +305,5 @@ const styles = StyleSheet.create({
     color: 'white',
     lineHeight: 22,
     textTransform: 'uppercase',
-  },
-  emptyText: {
-    width: 0,
-    height: 0,
   },
 });

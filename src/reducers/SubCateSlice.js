@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import AxiosInstance from '../helpers/AxiosInstance';
 
 export const LayDanhMucCon = createAsyncThunk(
   'category/subCate',
