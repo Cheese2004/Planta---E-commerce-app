@@ -1,4 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import HeaderComponent from '../../components/HeaderComponent';
 import ContentComponent from '../../components/ContentComponent';
@@ -20,7 +26,7 @@ const ThanhToan = props => {
   };
 
   return (
-    <View>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <HeaderComponent title={'THANH TOÁN'} onPressGoBack={onPressBack} />
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -45,7 +51,7 @@ const ThanhToan = props => {
         <View style={styles.footerContainer}>
           <View style={styles.footerRow}>
             <Text style={styles.rowText}>Tạm tính</Text>
-            <Text style={[styles.rowText, {color: '#000'}]}>500.000đ</Text>
+            <Text style={[styles.rowText, {color: '#000'}]}>250.000đ</Text>
           </View>
           <View style={styles.footerRow}>
             <Text style={styles.rowText}>Phí vận chuyển</Text>
@@ -54,7 +60,7 @@ const ThanhToan = props => {
           <View style={styles.footerRow}>
             <Text style={styles.rowFinalText}>Tổng cộng</Text>
             <Text style={[styles.rowFinalText, {color: 'green'}]}>
-              515.000đ
+              215.000đ
             </Text>
           </View>
           <View style={styles.btnContainer}>
@@ -70,7 +76,7 @@ const ThanhToan = props => {
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

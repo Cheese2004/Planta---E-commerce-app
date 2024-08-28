@@ -10,11 +10,11 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-// import AxiosInstance from '../helpers/AxiosInstance';
+import AxiosInstance from '../helpers/AxiosInstance';
 import {useDispatch, useSelector} from 'react-redux';
-import {DangKiTaiKhoan} from '../reducers/RegisterSlice';
+import {DangKyTaiKhoan} from '../reducers/RegisterSlice';
 
 const {width, height} = Dimensions.get('window');
 
@@ -46,7 +46,7 @@ const DangKi = props => {
         return;
       } else {
         setErr('');
-        dispatch(DangKiTaiKhoan({name, email, phoneNum, pw}));
+        dispatch(DangKyTaiKhoan({name, email, phoneNum, pw}));
       }
       const body = {
         name: name,

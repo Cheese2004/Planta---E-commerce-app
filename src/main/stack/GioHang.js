@@ -32,7 +32,7 @@ const GioHang = props => {
     navigation.navigate('Payment');
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={{backgroundColor: 'red'}}>
         <HeaderComponent title="GIỎ HÀNG" onPressGoBack={onPressBack} />
         {cart.length != 0 ? (
@@ -58,14 +58,14 @@ const GioHang = props => {
         )}
         <ScrollView showsVerticalScrollIndicator={false}>
           {cart.map((item, index) => {
-            return <CartComponent item={item} />;
+            return <CartComponent item={item} key={index} />;
           })}
         </ScrollView>
-        {cart.length != 0 ? (
+        {cart.length > 0 ? (
           <View style={styles.cartFooter}>
             <View style={styles.footerRow}>
               <Text style={styles.footerText}>Tạm tính</Text>
-              <Text style={styles.total}>0đ</Text>
+              <Text style={styles.total}>25000đ</Text>
             </View>
             <View style={styles.btnContainer}>
               <TouchableOpacity style={styles.btn} onPress={onPressToPayment}>
@@ -80,7 +80,7 @@ const GioHang = props => {
           ''
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

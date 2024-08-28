@@ -4,7 +4,7 @@ import React, {useState, useContext, createContext} from 'react';
 export const AppContext = createContext();
 // tạo dữ liệu dùng chung cho app
 export const AppProvider = props => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [cart, setCart] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   // thông tin người dùng

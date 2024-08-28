@@ -317,7 +317,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ABABAB',
     borderRadius: 10,
   },
 

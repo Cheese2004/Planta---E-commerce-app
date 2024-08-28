@@ -49,7 +49,7 @@ const CayTrong = ({navigation}) => {
         <View style={styles.tabsContainer}>
           {arrCate.map((item, index) => {
             return (
-              <View>
+              <View key={index}>
                 <TouchableOpacity
                   onPress={() => {
                     setCateSelected(item.catName);
